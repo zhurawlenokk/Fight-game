@@ -15,7 +15,7 @@ export default class ApiFetch {
             }
             return null;
         } catch (e) {
-            console.error('ERROR ', e);
+            console.error('ERROR', e);
         }
 
         return list;
