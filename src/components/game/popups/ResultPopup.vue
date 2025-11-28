@@ -2,14 +2,14 @@
   <div class="game-popup">
 	<div class="game-popup__info">
 	  <p class="game-popup__text"> {{winnerName}}</p>
-	  Победил!
+	  <p class="game-popup__text"> Победил!</p>
 	</div>
 	<div class="game-popup__winner">
 		<div class="game-popup__crown">
 			<img src="../../../images/crown.png" alt="crown" class="game-popup__image">
 		</div>
 
-	  <img :src="winnerImage" :alt="winnerName">
+	  <img :src="winnerImage" :alt="winnerName" class="game-popup__image">
 	</div>
 	<a href="/game" class="button game-popup__button">Ура, супер</a>
   </div>
