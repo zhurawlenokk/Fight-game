@@ -1,0 +1,170 @@
+<template>
+    <div class="player">
+        <div class="player-card">
+		  	<ProgressBar
+				:value="player?.playerHealth.currentHealth"
+				class="player-card__hp"
+			>
+			  {{player.playerHealth.currentHealth}}
+			</ProgressBar>
+            <p class="player-card__name">{{ player.characterInfo.characterName }}</p>
+            <div class="player-card__pic">
+                <img :src="player?.characterInfo.characterImg" :alt="player?.characterInfo.characterName">
+            </div>
+            <ComboBox
+                :comboBoxList="comboBoxList.skillBoxList"
+                @selectCubeEvent="setSelectedCubes"
+            />
+            <p class="player-card__summ">Суммарный урон: {{ comboBoxList.damageInfo.summaryDamage }}</p>
+            <div class="player-card__buttons">
+              <button
+                  @click="attackButton(player?.playerId)"
+				  :disabled="player?.attackButtonDisable"
+                  class="button player-card__button"
+              >
+                Attack
+              </button>
+              <button
+                  @click="comboBoxList.roll()"
+				  :disabled="player?.attackButtonDisable || comboBoxList.rollsCount === 0"
+                  class="button player-card__button"
+              >
+                Roll х{{comboBoxList.rollsCount}}
+              </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import {ref} from "vue";
+import ComboBox from '../player/comboBox/ComboBox.vue';
+import ProgressBar from 'primevue/progressbar';
+import PlayerCore from "./PlayerCore.ts";
+import SkillBox from "./comboBox/SkillBox.ts";
+
+const props = defineProps({
+    player: PlayerCore
+})
+
+// отвечает за содержимое блока выбора комбо
+const comboBoxList = ref({});
+comboBoxList.value = new SkillBox();
+
+const emit = defineEmits(['attackEnemyEvent']);
+
+function attackButton(playerId) {
+  emit('attackEnemyEvent', playerId, comboBoxList.value.damageInfo.summaryDamage);
+
+  comboBoxList.value.roll(true);
+}
+
+function setSelectedCubes(cubeId: number): void
+{
+    const selectAction = !comboBoxList.value.skillBoxList[cubeId].selected;
+
+    if (selectAction) {
+        // запретить выбор всех кубиков
+        if (Object.values(comboBoxList.value.exceptList).length < SkillBox.boxSize - 1) {
+            // отметить кубик в списке, что он выбран или снять отметку
+            comboBoxList.value.skillBoxList[cubeId].selectThis(selectAction);
+
+            // добавить в список выбранных и не дублировать, если уже есть
+            if (!comboBoxList.value.exceptList.includes(cubeId)) {
+                comboBoxList.value.exceptList.push(cubeId);
+            }
+        }
+    } else {
+        // отметить кубик в списке, что он выбран или снять отметку
+        comboBoxList.value.skillBoxList[cubeId].selectThis(selectAction);
+
+        // удаляем выбранное значение
+        delete comboBoxList.value.exceptList[comboBoxList.value.exceptList.indexOf(cubeId)];
+    }
+}
+</script>
+
+<style lang="scss">
+  .player-card {
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid #000;
+    padding: 12px 36px;
+    max-width: 312px;
+
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 36px;
+    }
+
+    &__button {
+      max-width: 45%;
+      width: 100%;
+      padding: 10px 20px;
+      background-color: #4169E1;
+      cursor: pointer;
+      color: #fff;
+
+      &:hover {
+        background-color: #9370DB;
+      }
+
+      &:active {
+        background-color: #483D8B;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+
+    &__hp {
+      margin-bottom: 36px;
+
+      .p-progressbar-value {
+        background-color: v-bind("player.playerHealth.healthColor");
+      }
+    }
+
+    &__pic {
+      border-radius: 8px;
+      width: 240px;
+      height: 240px;
+      margin-bottom: 25px;
+
+      img {
+        border-radius: inherit;
+        display: block;
+        height: 100%;
+        width: auto;
+        margin: 0 auto;
+      }
+    }
+
+	&__summ {
+	  margin-top: 15px;
+	}
+
+	&__name {
+	  font-size: 20px;
+	  text-align: center;
+	  margin-top: 0;
+	  margin-bottom: 15px;
+	}
+  }
+
+  .player-combo {
+	border: 1px solid #000;
+	margin-top: 50px;
+	padding: 10px 20px;
+	border-radius: 8px;
+  }
+
+  :root {
+    // настройки прогрессбара
+    --p-progressbar-background: #dedede;
+    --p-progressbar-height: 25px;
+    --p-progressbar-border-radius: 8px
+  }
+</style>

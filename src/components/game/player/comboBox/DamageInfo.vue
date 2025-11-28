@@ -1,0 +1,21 @@
+<template>
+    <template>
+        <div class="damage_info">
+            <div>Базовый урон: {{ baseDamage }}</div>
+            <div>Множитель урона: {{ multiplier }}</div>
+            <div>Формула рассчета урона: {{ formula }}</div>
+            <div>Суммарный урон: {{ summaryDamage }}</div>
+        </div>
+    </template>
+</template>
+
+<script setup lang="ts">
+defineProps({
+    multiplier: Number,
+    baseDamage: Number,
+    formula: Number,
+    summaryDamage: Number
+});
+</script>
+
+
