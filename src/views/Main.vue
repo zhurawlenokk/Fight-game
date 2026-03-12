@@ -1,0 +1,42 @@
+<template>
+	<div class="container">
+		<h1 class="title">Первая в мире супер игра</h1>
+		<a
+			href="/game"
+			class="button main-button"
+		>
+		  Начать игру
+		</a>
+	</div>
+</template>
+
+<style lang="scss" scoped>
+  .title {
+    font-size: 80px;
+    text-align: center;
+    margin-top: 95px;
+    margin-bottom: 0;
+  }
+
+  .main-button {
+    max-width: 300px;
+    width: 100%;
+    height: 100px;
+    font-size: 30px;
+    margin: 81px auto 0;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background-color: #4169E1;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: #9370DB;
+    }
+
+    &:active {
+      background-color: #483D8B;
+    }
+  }
+</style>

@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+}
+
+ul, ol {
+  list-style: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  margin: 0;
+  color: #000;
+  font-family: "Roboto", sans-serif;
+  max-height: 100vh;
+  height: 100%;
+  overflow: hidden;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.button {
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  text-align: center;
+  display: block;
+  background-color: transparent;
+}
+
+.main {
+  height: 100%;
+}
+
+
+
+
+
+
