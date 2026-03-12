@@ -4,5 +4,5 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 
 export default defineConfig({
     plugins: [vue(), vueDevTools()],
-    base: '/zhurawlenokk/Fight-game/'
+    base: '/Fight-game/',
 });
