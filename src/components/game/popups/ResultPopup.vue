@@ -12,7 +12,7 @@
 	  <img :src="winnerImage" :alt="winnerName" class="game-popup__image">
 	</div>
     <router-link
-        to="/game"
+        to="/"
         class="button game-popup__button"
     >
       Ура, супер!
@@ -65,30 +65,24 @@ defineProps({
 	  &__winner {
 		  max-width:  300px;
 		  width: 100%;
-		  border: 3px solid yellowgreen;
-		  border-radius: 8px;
 		  margin-top: 30px;
 		  position: relative;
-
-		  #{$self}__image {
-			border-radius: inherit;
-		  }
 	  }
 
 	  &__button {
       max-width: 320px;
       width: 100%;
-      border: 1px solid #000;
+      background: #bfff00;
       font-size: 40px;
       padding: 10px 20px;
       margin-top: 30px;
 
       &:hover {
-        background: yellowgreen;
+        background: yellow;
       }
 
       &:active {
-        background: forestgreen;
+        background: #ffd400;
       }
 	  }
 	}
