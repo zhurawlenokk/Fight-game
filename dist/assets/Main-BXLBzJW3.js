@@ -1,1 +1,0 @@
-import{_ as t,c as s,a as e,o}from"./index-D7qLH7Ym.js";const n={},c={class:"container"};function r(_,a){return o(),s("div",c,[...a[0]||(a[0]=[e("h1",{class:"title"},"Первая в мире супер игра",-1),e("a",{href:"/game",class:"button main-button"}," Начать игру ",-1)])])}const d=t(n,[["render",r],["__scopeId","data-v-a570afa9"]]);export{d as default};
